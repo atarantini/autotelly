@@ -48,24 +48,24 @@ Manage your Unotelly account
 
 optional arguments:
   -h, --help           show this help message and exit
-  --trial              Register an anonymous trial user to test Unotelly
-                       services.
+  --trial              Register an anonymous trial user to test Unotelly services.
+  --autoconfig         Create a config.json file with your trial username and password.
   --verbose            Show additional information about autotelly.
-  --username USERNAME  Your Unotelly username. If not provided the one in
-                       config.json will be used.
-  --password PASSWORD  Your Unotelly password. If not provided the one in
-                       config.json will be used.
+  --username USERNAME  Your Unotelly username. If not provided the one in config.json will be used.
+  --password PASSWORD  Your Unotelly password. If not provided the one in  config.json will be used.
 
 
 Configuration
 -------------
 
-Place a `config.json` file in your autotelly path with the following format::
+Place a ``config.json`` file in your autotelly path with the following format::
 
     {
         "username": "26crnzkr@lapibo5j.com",
         "password": "247792"
     }
+
+If you use the ``--autoconfig`` option with ``--trial`` a configuration file will be created using the trial account data.
 
 
 Licence

@@ -46,6 +46,7 @@ if __name__ == "__main__":
     # Parse CLI arguments
     parser = argparse.ArgumentParser(description='Manage your Unotelly account')
     parser.add_argument('--trial', action='store_true', default=False, help='Register an anonymous trial user to test Unotelly services.')
+    parser.add_argument('--autoconfig', action='store_true', default=False, help='Create a config.json file with your trial username and password.')
     parser.add_argument('--verbose', action='store_true', default=False, help='Show additional information about autotelly.')
     parser.add_argument('--username', default=False, help='Your Unotelly username. If not provided the one in config.json will be used.')
     parser.add_argument('--password', default=False, help='Your Unotelly password. If not provided the one in config.json will be used.')
@@ -104,3 +105,9 @@ if __name__ == "__main__":
         print(colored(response['feedback'], 'green'))
         if response['status'] == 1:
             print(colored('Change your DNS servers to: %s' % '/ '.join(DNS_SERVERS), 'yellow'))
+
+        if args.autoconfig:
+            f = file(os.path.join(PROJECT_PATH, 'config.json'), 'w')
+            f.write(json.dumps({'username': session.username, 'password': session.password}))
+            f.close()
+            print(colored('A config.json file was created with your trial account.', 'yellow'))
