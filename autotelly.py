@@ -8,7 +8,7 @@ import json
 from random import choice, randint
 
 import requests
-from BeautifulSoup import BeautifulSoup
+from bs4 import BeautifulSoup
 from termcolor import colored
 
 PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
