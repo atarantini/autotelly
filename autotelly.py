@@ -107,7 +107,7 @@ if __name__ == "__main__":
             print(colored('Change your DNS servers to: %s' % '/ '.join(DNS_SERVERS), 'yellow'))
 
         if args.autoconfig:
-            f = file(os.path.join(PROJECT_PATH, 'config.json'), 'w')
+            f = open(os.path.join(PROJECT_PATH, 'config.json'), 'w')
             f.write(json.dumps({'username': session.username, 'password': session.password}))
             f.close()
             print(colored('A config.json file was created with your trial account.', 'yellow'))
