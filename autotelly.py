@@ -54,7 +54,7 @@ if __name__ == "__main__":
 
     session = Session()
     if not args.trial:
-        session.from_response(requests.get('http://quickstart3.unotelly.com/login'))
+        session.from_response(requests.get('https://quickstart3.unotelly.com/login'))
         # Fetch username/password from CLI arguments or config.json
         if args.username and args.password:
             print('Logging in with supplied username and password...')
@@ -69,7 +69,7 @@ if __name__ == "__main__":
         # Login
         print('Logging in...')
         login_form_data = {'_token': session.token, 'email': session.username, 'password': session.password}
-        login = requests.post('http://quickstart3.unotelly.com/login', data=login_form_data, cookies=session.cookies)
+        login = requests.post('https://quickstart3.unotelly.com/login', data=login_form_data, cookies=session.cookies)
         if 'login' in login.history[0].headers['location']:
             print(colored('Can\'t login: username or password error.', 'red'))
             exit(1)
@@ -91,16 +91,16 @@ if __name__ == "__main__":
         # Register trial account
         print('Creating anonymous trail account...')
         # Fetch session and token for registration, setup registation form data
-        session.from_response(requests.get('http://quickstart3.unotelly.com/signup'), trial=True)
+        session.from_response(requests.get('https://quickstart3.unotelly.com/signup'), trial=True)
         registration_form_data = {'_token': session.token, 'firstname': '%s %s' % (rndstr(9), rndstr(12)), 'email': session.username, 'password': session.password}
 
         # Register and get userid
-        registration = requests.post('http://quickstart3.unotelly.com/signup', data=registration_form_data, cookies=session.cookies)
+        registration = requests.post('https://quickstart3.unotelly.com/signup', data=registration_form_data, cookies=session.cookies)
         session.userid = registration.history[0].headers['location'].split('/')[-1]
         print('Username: {username}\nPassword: {password}'.format(username=registration_form_data['email'], password=registration_form_data['password']))
 
         # Enable services
-        enable_netflix_us = requests.post('http://quickstart3.unotelly.com/dynamo/%s/updateAjax' % session.userid, data={'4':'1'}, cookies=session.cookies)
+        enable_netflix_us = requests.post('https://quickstart3.unotelly.com/dynamo/%s/updateAjax' % session.userid, data={'4':'1'}, cookies=session.cookies)
         response = json.loads(enable_netflix_us.text)
         print(colored(response['feedback'], 'green'))
         if response['status'] == 1:
